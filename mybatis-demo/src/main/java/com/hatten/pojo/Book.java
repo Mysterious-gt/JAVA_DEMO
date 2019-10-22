@@ -2,6 +2,7 @@ package com.hatten.pojo;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.apache.ibatis.type.Alias;
 
 /**
  * @Author: jerrylee
@@ -10,6 +11,7 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
+@Alias("book")
 public class Book {
     private Integer bookId;
     private String authorName;

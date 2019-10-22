@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.hatten.mapper.BookMapper">
-    <insert id="insertBook" parameterType="com.hatten.pojo.Book">
+    <insert id="insertBook" parameterType="book">
         insert into test_book(author_name, book_name, book_content) values(#{authorName},#{bookName},#{bookContent})
     </insert>
-    <select id="getBookById" resultType="com.hatten.pojo.Book">
+    <select id="getBookById" resultType="book">
         select book_id,author_name,book_name,book_content from test_book where book_id=#{id}
     </select>
 </mapper>

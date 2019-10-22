@@ -7,10 +7,10 @@
         insert into test_person(person_name, person_age, person_sex, create_date) values(#{personName},#{personAge}
         ,#{personSex},#{createDate})
     </insert>
-    <select id="getPersonById" resultType="com.hatten.pojo.Person">
+    <select id="getPersonById" resultType="person">
         select person_id,person_name,person_age,person_sex,create_date from test_person where person_id=#{id}
     </select>
-    <select id="getAllPersons" resultType="com.hatten.pojo.Person">
+    <select id="getAllPersons" resultType="person">
         select person_id, person_name, person_age, person_sex, create_date from test_person
     </select>
 </mapper>
