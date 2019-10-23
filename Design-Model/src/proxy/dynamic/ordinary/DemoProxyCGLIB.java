@@ -18,7 +18,9 @@ public class DemoProxyCGLIB implements MethodInterceptor {
     public Object getInstance(Object target){
         this.target=target;
         Enhancer enhancer=new Enhancer();
+        //需要被代理的类
         enhancer.setSuperclass(target.getClass());
+        //回调，调用cglib代理的intercept方法
         enhancer.setCallback(this);
         return enhancer.create();
     }
@@ -26,7 +28,7 @@ public class DemoProxyCGLIB implements MethodInterceptor {
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         System.out.println("cglib动态代理开始！");
-        final Object result = methodProxy.invokeSuper(target, objects);
+        final Object result = methodProxy.invokeSuper(o, objects);
         System.out.println("cglib动态代理完毕！");
         return result;
     }

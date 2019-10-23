@@ -7,10 +7,12 @@ package proxy.dynamic.ordinary;
  */
 public class Test {
     public static void main(String[] args) {
+        System.out.println("=====jdk动态代理======");
         DemoProxy handler=new DemoProxy();
         final DemoMapper proxy = (DemoMapper) handler.bind(new DemoMapperImpl());
         proxy.sayHello();
 
+        System.out.println("======cglib动态代理======");
         DemoProxyCGLIB cglib=new DemoProxyCGLIB();
         final DemoMapperImpl impl = (DemoMapperImpl) cglib.getInstance(new DemoMapperImpl());
         impl.sayHello();
