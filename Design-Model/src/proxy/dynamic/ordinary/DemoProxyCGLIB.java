@@ -12,9 +12,16 @@ import java.lang.reflect.Method;
  * @Desc: cglib动态代理类
  */
 public class DemoProxyCGLIB implements MethodInterceptor {
-    //别代理对象
+    //被代理对象
     private Object target;
 
+    /**
+     * @Desc: 获取被代理类/接口实例
+     * @Author: Jerry
+     * @Date: 2019/10/23
+     * @Param: [target]
+     * @Return: java.lang.Object
+     */
     public Object getInstance(Object target){
         this.target=target;
         Enhancer enhancer=new Enhancer();
@@ -25,6 +32,13 @@ public class DemoProxyCGLIB implements MethodInterceptor {
         return enhancer.create();
     }
 
+    /**
+     * @Desc: 回调方法
+     * @Author: Jerry
+     * @Date: 2019/10/23
+     * @Param: [o, method, objects, methodProxy]
+     * @Return: java.lang.Object
+     */
     @Override
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
         System.out.println("cglib动态代理开始！");
