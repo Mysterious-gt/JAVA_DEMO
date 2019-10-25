@@ -1,3 +1,5 @@
+package mybatis;
+
 import com.hatten.mapper.PersonMapper;
 import com.hatten.pojo.Person;
 import com.hatten.service.BatchUpdateService;
@@ -7,21 +9,24 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 /**
  * @Author: jerrylee
- * @Date: 2019/10/21 9:42 上午
- * @Desc: Mybatis测试
+ * @Date: 2019/10/25 3:52 下午
+ * @Desc: 测试SqlSession
  */
-public class MybatisApp {
-    public static void main(String[] args) throws IOException {
+public class Test01 {
+    @Test
+    public void testSQLSession() throws IOException {
         //mybatisByXML();
         //mybatisBySigniture();
-        //mybatisBlobService();
-        batchUpdateService();
+        mybatisBlobService();
+        //batchUpdateService();
+
     }
 
     private static void batchUpdateService() throws IOException {
@@ -37,7 +42,7 @@ public class MybatisApp {
      * @Return: void
      */
     private static void mybatisBlobService() throws IOException {
-        BlobService service=new BlobService();
+        BlobService service = new BlobService();
         //service.mybatisBookInsert();
         service.mybatisBookRead();
     }
@@ -65,19 +70,19 @@ public class MybatisApp {
      * @Return: void
      */
     private static void mybatisByXML() throws IOException {
-        String path="mybatis-config.xml";
+        String path = "mybatis-config.xml";
         InputStream in = Resources.getResourceAsStream(path);
-        SqlSessionFactoryBuilder builder=new SqlSessionFactoryBuilder();
+        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         SqlSessionFactory factory = builder.build(in);
 
-        SqlSession session=null;
+        SqlSession session = null;
         try {
-            session=factory.openSession();
+            session = factory.openSession();
             final PersonMapper mapper = session.getMapper(PersonMapper.class);
             final Person person = mapper.getPersonById(1);
             System.out.println(person.toString());
-        }finally {
-            if (session!=null){
+        } finally {
+            if (session != null) {
                 session.close();
             }
         }
