@@ -60,7 +60,8 @@ public class BlobService {
         final BookMapper mapper = sqlSession.getMapper(BookMapper.class);
         final Book book = mapper.getBookById(1);
         final byte[] content = book.getBookContent();
+        final String contentS = new String(content);
         System.out.println(book.toString());
-        System.out.println(content.length);
+        System.out.println(contentS);
     }
 }
