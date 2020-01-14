@@ -10,4 +10,9 @@
             <column name="Name" value="testName"/>
         </bean>
     </beans>
+    <book>
+        <name>《三体》</name>
+        <author>liu</author>
+        <desc>描述</desc>
+    </book>
 </configuration>
