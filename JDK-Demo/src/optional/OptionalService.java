@@ -1,5 +1,7 @@
 package optional;
 
+import entity.Company;
+
 import java.util.Optional;
 
 /**
