@@ -5,6 +5,8 @@ import com.hatten.pojo.Person;
 import com.hatten.service.BatchUpdateService;
 import com.hatten.service.BlobService;
 import com.hatten.utils.SqlSessionFactoryUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -24,9 +26,9 @@ public class Test01 {
     public void testSQLSession() throws IOException {
         //mybatisByXML();
         //mybatisBySigniture();
-        mybatisBlobService();
+        //mybatisBlobService();
         //batchUpdateService();
-
+        testLog4J();
     }
 
     private static void batchUpdateService() throws IOException {
@@ -86,5 +88,14 @@ public class Test01 {
                 session.close();
             }
         }
+    }
+
+    private static void testLog4J(){
+        final Log log = LogFactory.getLog(Test01.class);
+        log.info("==========test log4j!==========");
+        log.debug("==========test debug!==========");
+        log.error("==========test error!==========");
+        log.trace("==========test trace!==========");
+        log.fatal("==========test fatal!==========");
     }
 }
