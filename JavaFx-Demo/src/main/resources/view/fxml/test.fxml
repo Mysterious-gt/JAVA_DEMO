@@ -3,10 +3,25 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import javafx.scene.text.TextFlow?>
-<?import javafx.scene.text.Text?>
-<AnchorPane styleClass="context-back" prefHeight="500.0" prefWidth="300.0"
-            xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="cn.sunyog.controller.TextController">
-        <Text styleClass="text-class">FXML 方式启动</Text>
+<AnchorPane prefHeight="500.0" prefWidth="300.0" styleClass="context-back" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.sunyog.controller.TextController">
+   <children>
+      <VBox fx:id="root" layoutX="69.0" layoutY="50.0" prefHeight="500.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="label0" text="默认标签" />
+            <Label fx:id="label1" text="设定自动换行标签" />
+            <Label fx:id="label2" text="增加CSS效果的标签" />
+            <Label fx:id="label3" text="带旋转效果的标签" />
+            <Label fx:id="label4" text="带图形的标签" />
+            <Label fx:id="label" text="鼠标动作显示标签" />
+
+            <Button fx:id="button">旋转按钮</Button>
+            <RadioButton fx:id="rb1">红色</RadioButton>
+            <RadioButton fx:id="rb2">绿色</RadioButton>
+            <RadioButton fx:id="rb3">蓝色</RadioButton>
+            <ToggleButton fx:id="tb1">正常</ToggleButton>
+            <ToggleButton fx:id="tb2">0.5倍</ToggleButton>
+            <ToggleButton fx:id="tb3">1.5倍</ToggleButton>
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>

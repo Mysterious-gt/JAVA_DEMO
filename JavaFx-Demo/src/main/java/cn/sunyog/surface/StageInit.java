@@ -1,10 +1,6 @@
 package cn.sunyog.surface;
 
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
-import java.lang.reflect.Modifier;
 
 /**
  * @Author: jerrylee

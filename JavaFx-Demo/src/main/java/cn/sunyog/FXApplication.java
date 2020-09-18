@@ -2,7 +2,10 @@ package cn.sunyog;
 
 import cn.sunyog.surface.*;
 import javafx.application.Application;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DialogPane;
 import javafx.scene.image.ImageView;
@@ -44,7 +47,14 @@ public class FXApplication extends Application {
 //        Scene scene=new Scene(PaneTest.testDialog());
 //        Scene scene=new Scene(ContainerTest.testTitledPane());
 //        Scene scene = new Scene(ImgTest.testImg());
-        Scene scene = new Scene(ProgressTest.testProgres());
+//        Scene scene = new Scene(ProgressTest.testProgres());
+//        Scene scene = new Scene(PaneTest.testScrollPane());
+//        Scene scene=new Scene(WebTest.testWebUrl());
+//        Scene scene=new Scene(WebTest.testHTMLJS());
+        Parent root = FXMLLoader.load(this.getClass().getResource("/view/fxml/test.fxml"));
+
+        Scene scene=new Scene(root,400,600);
+        scene.getStylesheets().add("/view/css/test.css");
         primaryStage.setTitle("测试布局");
         primaryStage.setScene(scene);
         primaryStage.show();

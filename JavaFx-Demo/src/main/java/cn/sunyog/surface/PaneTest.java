@@ -8,13 +8,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.DialogPane;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.shape.Box;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+
+import java.io.*;
 
 /**
  * @Author: jerrylee
@@ -185,5 +184,27 @@ public class PaneTest {
         pane.setPrefSize(300,200);
         pane.setPadding(new Insets(20,20,20,20));
         return pane;
+    }
+
+    public static ScrollPane testScrollPane() throws IOException {
+        ScrollPane pane=new ScrollPane();
+        pane.setPadding(new Insets(10));
+        pane.setPrefSize(300,200);
+        TextFlow area=new TextFlow();
+        pane.setContent(area);
+
+        File file=new File("/Users/jerrylee/Desktop/Project/drug-store/sql/drugstore_store_drugs_infos.sql");
+        Reader in=new FileReader(file);
+        char[] buff=new char[1024];
+        in.read(buff);
+        String str=new String(buff);
+        area.getChildren().addAll(new Text(str));
+
+        in.close();
+        return pane;
+    }
+
+    public static Pane testToolBar(){
+        return null;
     }
 }

@@ -2,3 +2,13 @@
     -fx-fill: blueviolet;
     -fx-font: bold italic 50px "sans-serif";
 }
+.button{
+    -fx-text-fill: black;
+    -fx-font: bold italic 50px "sans-serif";
+}
+
+.label-class{
+    -fx-border-color: red;
+    -fx-font: bold italic 20px "sans-serif";
+    /*-fx-background-color: black;*/
+}
