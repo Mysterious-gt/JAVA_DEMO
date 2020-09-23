@@ -1,6 +1,6 @@
-package com.hatten.mapper;
+package cn.sunyog.mapper;
 
-import com.hatten.pojo.Book;
+import cn.sunyog.pojo.Book;
 
 /**
  * @Author: jerrylee

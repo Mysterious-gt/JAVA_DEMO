@@ -1,6 +1,6 @@
-package com.hatten.mapper;
+package cn.sunyog.mapper;
 
-import com.hatten.pojo.Person;
+import cn.sunyog.pojo.Person;
 
 import java.util.List;
 

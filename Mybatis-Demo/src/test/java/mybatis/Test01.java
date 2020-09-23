@@ -1,10 +1,10 @@
 package mybatis;
 
-import com.hatten.mapper.PersonMapper;
-import com.hatten.pojo.Person;
-import com.hatten.service.BatchUpdateService;
-import com.hatten.service.BlobService;
-import com.hatten.utils.SqlSessionFactoryUtil;
+import cn.sunyog.mapper.PersonMapper;
+import cn.sunyog.pojo.Person;
+import cn.sunyog.service.BatchUpdateService;
+import cn.sunyog.service.BlobService;
+import cn.sunyog.utils.SqlSessionFactoryUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.io.Resources;

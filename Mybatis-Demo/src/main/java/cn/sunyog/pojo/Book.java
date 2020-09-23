@@ -1,4 +1,4 @@
-package com.hatten.pojo;
+package cn.sunyog.pojo;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

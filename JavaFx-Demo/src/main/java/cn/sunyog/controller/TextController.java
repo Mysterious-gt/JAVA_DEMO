@@ -159,6 +159,4 @@ public class TextController {
         }
         return view;
     }
-
-
 }

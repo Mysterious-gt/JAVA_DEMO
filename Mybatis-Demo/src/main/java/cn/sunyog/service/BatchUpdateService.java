@@ -1,8 +1,8 @@
-package com.hatten.service;
+package cn.sunyog.service;
 
-import com.hatten.mapper.PersonMapper;
-import com.hatten.pojo.Person;
-import com.hatten.utils.SqlSessionFactoryUtil;
+import cn.sunyog.mapper.PersonMapper;
+import cn.sunyog.pojo.Person;
+import cn.sunyog.utils.SqlSessionFactoryUtil;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
