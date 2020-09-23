@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.sunyog</groupId>
+    <artifactId>JavaFx-Demo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.zenjava</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>8.8.3</version>
+                <configuration>
+                    <mainClass>cn.dl.MainApp</mainClass>
+                    <!-- 运行文件名 -->
+                    <appName>RUNFILE</appName>
+                    <!-- 图标位置 -->
+                    <deployDir>
+                        /Users/jerrylee/Documents/code/java-project/demo/JavaFx-Demo/src/main/resources/view/img/icon_refresh.png
+                    </deployDir>
+                    <!-- 菜单 -->
+                    <needMenu>true</needMenu>
+                    <!-- 桌面图标 -->
+                    <needShortcut>true</needShortcut>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
