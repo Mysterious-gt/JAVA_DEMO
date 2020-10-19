@@ -6,6 +6,7 @@ import cn.sunyog.utils.SqlSessionFactoryUtil;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.util.Date;
@@ -17,6 +18,7 @@ import java.util.List;
  * @Desc: 批量更新Service
  */
 public class BatchUpdateService {
+    private Logger logger=Logger.getLogger(this.getClass());
     /**
      * @Desc: 获取支持批量更新的sqlsession
      * @Author: Jerry
@@ -45,7 +47,7 @@ public class BatchUpdateService {
 
         //以上sql执行完毕后可以select到
         final List<Person> persons = mapper.getAllPersons();
-        System.out.println(persons.size());
+        logger.info(persons.size());
         //所有操作完成之后需要commit
         bSession.commit();
     }

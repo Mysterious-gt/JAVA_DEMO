@@ -11,6 +11,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -22,16 +23,17 @@ import java.io.InputStream;
  * @Desc: 测试SqlSession
  */
 public class Test01 {
+    private Logger logger=Logger.getLogger(this.getClass());
     @Test
     public void testSQLSession() throws IOException {
         //mybatisByXML();
         //mybatisBySigniture();
-        //mybatisBlobService();
+        mybatisBlobService();
         //batchUpdateService();
-        testLog4J();
+        //testLog4J();
     }
 
-    private static void batchUpdateService() throws IOException {
+    private void batchUpdateService() throws IOException {
         final BatchUpdateService batchService = new BatchUpdateService();
         batchService.doBatchUpdate();
     }
@@ -43,7 +45,7 @@ public class Test01 {
      * @Param: []
      * @Return: void
      */
-    private static void mybatisBlobService() throws IOException {
+    private void mybatisBlobService() throws IOException {
         BlobService service = new BlobService();
         //service.mybatisBookInsert();
         service.mybatisBookRead();
@@ -56,11 +58,11 @@ public class Test01 {
      * @Param: []
      * @Return: void
      */
-    private static void mybatisBySigniture() throws IOException {
+    private void mybatisBySigniture() throws IOException {
         final SqlSession session = SqlSessionFactoryUtil.getSqlSession();
         final PersonMapper mapper = session.getMapper(PersonMapper.class);
         final Person person = mapper.getPersonById(1);
-        System.out.println(person.toString());
+        logger.info(person.toString());
         SqlSessionFactoryUtil.closeSqlSession(session);
     }
 
@@ -71,7 +73,7 @@ public class Test01 {
      * @Param: []
      * @Return: void
      */
-    private static void mybatisByXML() throws IOException {
+    private void mybatisByXML() throws IOException {
         String path = "mybatis-config.xml";
         InputStream in = Resources.getResourceAsStream(path);
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
@@ -90,7 +92,7 @@ public class Test01 {
         }
     }
 
-    private static void testLog4J(){
+    private void testLog4J(){
         final Log log = LogFactory.getLog(Test01.class);
         log.info("==========test log4j!==========");
         log.debug("==========test debug!==========");

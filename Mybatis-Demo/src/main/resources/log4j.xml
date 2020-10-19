@@ -34,7 +34,7 @@
         优先级可选 :all < trace < debug < info < warn < error < fatal < off
         填写的参数表示输出自己优先级和比自己优先级高的所有的日志级别的信息
         -->
-        <priority value="all"/>
+        <priority value="debug"/>
         <!-- appender-ref表示引用一个叠加器-->
         <appender-ref ref="myConsole"/>
         <!--<appender-ref ref="myFile1"/>

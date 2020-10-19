@@ -4,6 +4,7 @@ import cn.sunyog.mapper.BookMapper;
 import cn.sunyog.pojo.Book;
 import cn.sunyog.utils.SqlSessionFactoryUtil;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 
@@ -13,6 +14,8 @@ import java.io.*;
  * @Desc: 测试blob字段的读取和写入
  */
 public class BlobService {
+    private Logger logger=Logger.getLogger(this.getClass());
+
     private byte[] getTestBlob() throws IOException {
         File file=new File("/Users/jerrylee/Documents/code/helloworld.html");
         InputStream in=null;
@@ -61,7 +64,7 @@ public class BlobService {
         final Book book = mapper.getBookById(1);
         final byte[] content = book.getBookContent();
         final String contentS = new String(content);
-        System.out.println(book.toString());
-        System.out.println(contentS);
+        logger.info(book.toString());
+        logger.info(contentS);
     }
 }

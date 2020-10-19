@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+>
+    <!--<bean name="Bean" class="cn.sunyog.bean.XMLBean">
+        <property name="message" value="默认设置的 Bean"/>
+    </bean>-->
+
+    <!--<bean id="Singleton-Bean" class="cn.sunyog.bean.XMLBean"
+          lazy-init="true"
+          scope="singleton"
+          init-method="initFunc" destroy-method="destroyFund">
+        <property name="message" value="XML Bean，懒加载，singleton模式，已设定初始化方法，已设定销毁方法" />
+    </bean>
+
+    <bean id="cons-bean" class="cn.sunyog.bean.AutowireBean" lazy-init="true">
+        <constructor-arg name="child" ref="Bean" />
+    </bean>
+
+    <bean id="set-bean" class="cn.sunyog.bean.AutowireBean" lazy-init="true">
+        <property name="child" ref="Bean" />
+    </bean>-->
+    <bean name="child" class="cn.sunyog.bean.XMLBean">
+        <property name="message" value="默认设置的 Bean"/>
+    </bean>
+    <bean id="autowire-name-bean" class="cn.sunyog.bean.AutowireBean" lazy-init="true" autowire="byName" />
+    <bean id="autowire-type-bean" class="cn.sunyog.bean.AutowireBean" lazy-init="true" autowire="byType" />
+    <bean id="autowire-cons-bean" class="cn.sunyog.bean.AutowireBean" lazy-init="true" autowire="constructor" />
+</beans>
