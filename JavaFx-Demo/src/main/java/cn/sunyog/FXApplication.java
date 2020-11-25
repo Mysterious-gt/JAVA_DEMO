@@ -22,10 +22,11 @@ import java.util.TimerTask;
  * @Desc: javafx启动类 继承 Application类
  */
 public class FXApplication extends Application {
-    private String msg="DEFAULT";
-    private Pane testBind(){
-        DialogPane pane=new DialogPane();
-        Text text=new Text(msg);
+    private String msg = "DEFAULT";
+
+    private Pane testBind() {
+        DialogPane pane = new DialogPane();
+        Text text = new Text(msg);
 
         return pane;
     }
@@ -49,12 +50,12 @@ public class FXApplication extends Application {
 //        Scene scene = new Scene(ImgTest.testImg());
 //        Scene scene = new Scene(ProgressTest.testProgres());
 //        Scene scene = new Scene(PaneTest.testScrollPane());
-//        Scene scene=new Scene(WebTest.testWebUrl());
-//        Scene scene=new Scene(WebTest.testHTMLJS());
-        Parent root = FXMLLoader.load(this.getClass().getResource("/view/fxml/test.fxml"));
+//      Scene scene=new Scene(WebTest.testWebUrl());
+        Scene scene = new Scene(WebTest.testHTMLJS());
+//        Parent root = FXMLLoader.load(this.getClass().getResource("/view/fxml/test.fxml"));
 
-        Scene scene=new Scene(root,400,600);
-        scene.getStylesheets().add("/view/css/test.css");
+//        Scene scene=new Scene(scene,400,600);
+//        scene.getStylesheets().add("/view/css/test.css");
         primaryStage.setTitle("测试布局");
         primaryStage.setScene(scene);
         primaryStage.show();

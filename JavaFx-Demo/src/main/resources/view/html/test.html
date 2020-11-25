@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My HTML Test File</title>
+</head>
+<body>
+<h1 id="hh1">text H1</h1>
+<h1 id="hh2">text H1</h1>
+<h1>text H1</h1>
+<h1>text H1</h1>
+<form>
+    <input type="password" name="pwd"/>
+    <input type="text" name="username"/>
+    <input type="text" name="email"/>
+    <a name="link" href="javascript:func('who am i')">link</a>
+    <a href="javascript:funcABCD()">abcd</a>
+</form>
+<img src="../img/icon_refresh.png">
+<style>
+    h1{
+        background-color:red;
+    }
+    button{
+        padding: 10px;
+        font-size: 20px;
+    }
+</style>
+
+<script>
+    function func(msg) {
+        document.getElementById("hh1").innerHTML=msg;
+    }
+    function funcABCD() {
+        var out = app.sout();
+        document.getElementById("hh2").innerHTML=out;
+    }
+</script>
+</body>
+</html>
