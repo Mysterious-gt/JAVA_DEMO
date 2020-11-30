@@ -51,9 +51,10 @@ public class FXApplication extends Application {
 //        Scene scene = new Scene(ProgressTest.testProgres());
 //        Scene scene = new Scene(PaneTest.testScrollPane());
 //      Scene scene=new Scene(WebTest.testWebUrl());
-        Scene scene = new Scene(WebTest.testHTMLJS());
+//        Scene scene = new Scene(WebTest.testHTMLJS());
 //        Parent root = FXMLLoader.load(this.getClass().getResource("/view/fxml/test.fxml"));
-
+//        Scene scene=new Scene(TableTest.getSimpleTable());
+        Scene scene=new Scene(TableTest.getEntityTable());
 //        Scene scene=new Scene(scene,400,600);
 //        scene.getStylesheets().add("/view/css/test.css");
         primaryStage.setTitle("测试布局");

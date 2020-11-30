@@ -7,14 +7,15 @@
 <body>
 <h1 id="hh1">text H1</h1>
 <h1 id="hh2">text H1</h1>
-<h1>text H1</h1>
+<h1 id="hh3">text H1</h1>
 <h1>text H1</h1>
 <form>
     <input type="password" name="pwd"/>
     <input type="text" name="username"/>
     <input type="text" name="email"/>
-    <a name="link" href="javascript:func('who am i')">link</a>
-    <a href="javascript:funcABCD()">abcd</a>
+    <a href="javascript:func('who am i')">innerjs</a>
+    <a href="javascript:funcABCD()">jstojava</a>
+    <a href="javascript:outFunc()">outjs</a>
 </form>
 <img src="../img/icon_refresh.png">
 <style>
@@ -36,5 +37,6 @@
         document.getElementById("hh2").innerHTML=out;
     }
 </script>
+<script type="text/javascript" src="../js/test.js"></script>
 </body>
 </html>
