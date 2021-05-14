@@ -2,6 +2,8 @@ package test;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @Author: jerrylee
@@ -11,7 +13,18 @@ import java.util.Random;
 public class StringTest {
     public static void main(String[] args) {
         //testStrMethod();
+        String str="java提取aa汉子11111";
+        Pattern pattern=Pattern.compile("[\\u4e00-\\u9fa5]");
+        Matcher matcher = pattern.matcher(str);
+        String res = matcher.replaceAll("");
 
+        Pattern pattern1=Pattern.compile("[^\\u4e00-\\u9fa5]");
+        Matcher matcher1 = pattern1.matcher(str);
+        String res1 = matcher1.replaceAll("");
+
+        System.out.println(str);
+        System.out.println(res);
+        System.out.println(res1);
     }
 
     private static void testStrMethod() {
