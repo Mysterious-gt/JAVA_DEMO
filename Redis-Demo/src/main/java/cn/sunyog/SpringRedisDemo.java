@@ -202,28 +202,4 @@ public class SpringRedisDemo {
         StaticLog.info("====>" + members_2);
         this.template.delete("sort_key");
     }
-
-    /**
-     * redis发布订阅模式
-     */
-//    @Test
-//    public void pubSub() {
-//        RedisMessageListenerContainer container=new RedisMessageListenerContainer();
-//        container.setConnectionFactory(jedisFactoryConfig());
-//        Jackson2JsonRedisSerializer serializer = jacksonSerializerConfig();
-//        container.setTopicSerializer(serializer);
-//
-//        MessageListenerAdapter adapter=new MessageListenerAdapter(MySubscribe.class);
-//        container.addMessageListener(adapter,new ChannelTopic("channel1"));
-//    }
-//
-//    /**
-//     * 订阅者
-//     */
-//    class MySubscribe implements MessageListener{
-//        @Override
-//        public void onMessage(Message message, byte[] pattern) {
-//            Console.log("channel1 message: ====>"+message.toString());
-//        }
-//    }
 }
