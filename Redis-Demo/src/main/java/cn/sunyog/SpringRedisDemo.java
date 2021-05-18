@@ -1,15 +1,25 @@
 package cn.sunyog;
 
+import cn.hutool.core.lang.Console;
 import cn.hutool.log.StaticLog;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.DefaultBaseTypeLimitingValidator;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.data.redis.connection.Message;
+import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceClientConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.listener.RedisMessageListenerContainer;
+import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,14 +40,51 @@ public class SpringRedisDemo {
      */
     @Before
     public void configTemplate() {
-        //lettuceConfig();
-        jedisPoolConfig();
+        //redis工厂配置，可以使用jedis或lettuce
+        //LettuceConnectionFactory factory = lettuceFactoryConfig();
+        JedisConnectionFactory factory = jedisFactoryConfig();
+
+        //redis序列化配置
+        Jackson2JsonRedisSerializer serializer = jacksonSerializerConfig();
+
+        //redis template配置
+        configTemplate(factory, serializer);
     }
 
     /**
-     * jedis方式配置redisTemplate
+     * 配置redisTemplate的工厂
+     * @param factory
+     * @param serializer
      */
-    private void jedisPoolConfig() {
+    private void configTemplate(JedisConnectionFactory factory, Jackson2JsonRedisSerializer serializer) {
+        this.template = new RedisTemplate();
+        this.template.setConnectionFactory(factory);
+        this.template.setKeySerializer(serializer);
+        this.template.setValueSerializer(serializer);
+        this.template.setHashKeySerializer(serializer);
+        this.template.setHashValueSerializer(serializer);
+        this.template.afterPropertiesSet();
+    }
+
+    /**
+     * 使用jackson序列化
+     * @return
+     */
+    private Jackson2JsonRedisSerializer jacksonSerializerConfig() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        objectMapper.activateDefaultTyping(new DefaultBaseTypeLimitingValidator(),
+                ObjectMapper.DefaultTyping.NON_FINAL);
+
+        Jackson2JsonRedisSerializer serializer = new Jackson2JsonRedisSerializer<>(String.class);
+        serializer.setObjectMapper(objectMapper);
+        return serializer;
+    }
+
+    /**
+     * jedis工厂配置
+     */
+    private JedisConnectionFactory jedisFactoryConfig() {
         //配置ip:port
         String host = CommonUtil.getStrSetting("redis.host");
         Integer port = CommonUtil.getIntSetting("redis.port");
@@ -48,17 +95,13 @@ public class SpringRedisDemo {
         GenericObjectPoolConfig config = factory.getPoolConfig();
         //配置jedisPool参数
         CommonUtil.commonConfig(config);
-
-        this.template = new RedisTemplate();
-        this.template.setConnectionFactory(factory);
-        this.template.afterPropertiesSet();
-        this.template.setValueSerializer(new StringRedisSerializer());
+        return factory;
     }
 
     /**
-     * 官方推荐的配置方式
+     * lettuce的配置方式
      */
-    private void lettuceConfig() {
+    private LettuceConnectionFactory lettuceFactoryConfig() {
         String host = CommonUtil.getStrSetting("redis.host");
         Integer port = CommonUtil.getIntSetting("redis.port");
         Integer database = CommonUtil.getIntSetting("redis.database");
@@ -68,10 +111,7 @@ public class SpringRedisDemo {
         serverConfig.setDatabase(database);
         LettuceConnectionFactory factory = new LettuceConnectionFactory(serverConfig, clientConfig);
         factory.afterPropertiesSet();//此代码不能少，否则报空指针
-        this.template = new RedisTemplate();
-        this.template.setConnectionFactory(factory);
-        this.template.afterPropertiesSet();
-        this.template.setValueSerializer(new StringRedisSerializer());
+        return factory;
     }
 
     @Test
@@ -162,4 +202,28 @@ public class SpringRedisDemo {
         StaticLog.info("====>" + members_2);
         this.template.delete("sort_key");
     }
+
+    /**
+     * redis发布订阅模式
+     */
+//    @Test
+//    public void pubSub() {
+//        RedisMessageListenerContainer container=new RedisMessageListenerContainer();
+//        container.setConnectionFactory(jedisFactoryConfig());
+//        Jackson2JsonRedisSerializer serializer = jacksonSerializerConfig();
+//        container.setTopicSerializer(serializer);
+//
+//        MessageListenerAdapter adapter=new MessageListenerAdapter(MySubscribe.class);
+//        container.addMessageListener(adapter,new ChannelTopic("channel1"));
+//    }
+//
+//    /**
+//     * 订阅者
+//     */
+//    class MySubscribe implements MessageListener{
+//        @Override
+//        public void onMessage(Message message, byte[] pattern) {
+//            Console.log("channel1 message: ====>"+message.toString());
+//        }
+//    }
 }

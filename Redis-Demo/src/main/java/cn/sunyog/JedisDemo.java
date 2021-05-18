@@ -1,13 +1,11 @@
 package cn.sunyog;
 
+import cn.hutool.core.lang.Console;
 import cn.hutool.log.StaticLog;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
-import redis.clients.jedis.JedisPoolConfig;
-import redis.clients.jedis.Tuple;
+import redis.clients.jedis.*;
 
 import java.util.*;
 
@@ -117,6 +115,8 @@ public class JedisDemo {
         Boolean hasMember_2 = jedis.sismember("setKey", "member10");
         StaticLog.info("====>"+hasMember+"\t"+hasMember_2);
 
+        Long len = jedis.scard("setKey");
+        StaticLog.info("====>"+len);
         jedis.expire("setKey", 2);
     }
 
@@ -141,4 +141,70 @@ public class JedisDemo {
         jedis.expire("sortedSet", 2);
     }
 
+    /**
+     * 发布订阅模式
+     */
+    @Test
+    public void publishSubscribe() throws InterruptedException {
+        Jedis client = this.pool.getResource();
+        Thread thread = new SubScriptThread(this.pool);
+        StaticLog.info("====>"+thread.getState());
+        thread.start();
+        StaticLog.info("====>"+thread.getState());
+        Set<String> keys = client.keys("*");
+        StaticLog.info("====>"+keys);
+        //等待线程执行完毕
+        StaticLog.info("====>"+thread.getState());
+        Console.log("====>main thread sleep");
+        Thread.sleep(600000);
+    }
+
+    class JedisPubSubClass extends JedisPubSub{
+        public void onMessage(String channel, String message) {
+            StaticLog.info("publish: onMessage====>"+message);
+        }
+
+        public void onPMessage(String pattern, String channel, String message) {
+            StaticLog.info("publish: onPMessage====>"+message);
+        }
+
+        public void onSubscribe(String channel, int subscribedChannels) {
+        }
+
+        public void onUnsubscribe(String channel, int subscribedChannels) {
+        }
+
+        public void onPUnsubscribe(String pattern, int subscribedChannels) {
+        }
+
+        public void onPSubscribe(String pattern, int subscribedChannels) {
+        }
+
+        public void onPong(String pattern) {
+            StaticLog.info("publish:====>pong");
+        }
+    }
+
+    class SubScriptThread extends Thread{
+        private JedisPool pool;
+        public SubScriptThread(JedisPool pool) {
+            super("SubScriptThread");
+            this.pool=pool;
+        }
+
+        @Override
+        public void run() {
+            super.run();
+            Jedis jedis=null;
+            try {
+                jedis = this.pool.getResource();
+                JedisPubSub jedisPub = new JedisPubSubClass();
+                jedis.subscribe(jedisPub, "channel1");
+            }finally {
+                if(jedis!=null){
+                    jedis.close();
+                }
+            }
+        }
+    }
 }

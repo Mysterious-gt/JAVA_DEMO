@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @Desc: 拦截器配置
  */
 @Configuration
-public class InterceperConfig implements WebMvcConfigurer {
+public class SessionInterceperConfig implements WebMvcConfigurer {
     /**
      * @Desc: 基于session的认证
      * @Author: MysteriousGT

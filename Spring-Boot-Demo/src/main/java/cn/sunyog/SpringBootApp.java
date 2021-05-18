@@ -9,8 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @Desc:
  */
 @SpringBootApplication
-public class SecurityApp {
+public class SpringBootApp {
     public static void main(String[] args) {
-        SpringApplication.run(SecurityApp.class);
+        SpringApplication.run(SpringBootApp.class);
     }
 }

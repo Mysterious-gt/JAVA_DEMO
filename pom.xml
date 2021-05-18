@@ -15,7 +15,7 @@
         <module>Spring-Demo</module>
         <module>Redis-Demo</module>
         <module>Tools</module>
-        <module>Security-OAuth20</module>
+        <module>Spring-Boot-Demo</module>
     </modules>
 
     <properties>
@@ -28,7 +28,7 @@
         <commons.logging.version>1.2</commons.logging.version>
         <springframework.version>5.2.9.RELEASE</springframework.version>
         <spring.data.version>2.0.5.RELEASE</spring.data.version>
-        <spring.boot.version>2.2.5.RELEASE</spring.boot.version>
+        <spring.boot.version>2.0.5.RELEASE</spring.boot.version>
         <spring.security.version>5.3.9.RELEASE</spring.security.version>
         <jedis.version>2.9.1</jedis.version>
         <lettuce.version>6.1.1.RELEASE</lettuce.version>
@@ -37,6 +37,7 @@
         <freemarker.version>2.3.29</freemarker.version>
         <apache.poi.version>3.9</apache.poi.version>
         <javax.servlet.version>4.0.1</javax.servlet.version>
+        <jackson.version>2.11.3</jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -132,6 +133,11 @@
                 <artifactId>spring-boot-starter-security</artifactId>
                 <version>${spring.boot.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring.data.version}</version>
+            </dependency>
             <!--redis template-->
             <dependency>
                 <groupId>org.springframework.data</groupId>
@@ -149,6 +155,22 @@
                 <groupId>io.lettuce</groupId>
                 <artifactId>lettuce-core</artifactId>
                 <version>${lettuce.version}</version>
+            </dependency>
+            <!--jackson-->
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
             </dependency>
             <!--office工具-->
             <dependency>
