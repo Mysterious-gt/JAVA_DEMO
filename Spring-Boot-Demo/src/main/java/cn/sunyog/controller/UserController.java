@@ -5,6 +5,7 @@ import cn.sunyog.entity.UserDto;
 import cn.sunyog.service.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,4 +57,8 @@ public class UserController {
         return fullName+"  访问/user/url资源";
     }
 
+    @PostMapping("/login-success")
+    public String loginSuccess(){
+        return "登录成功！";
+    }
 }

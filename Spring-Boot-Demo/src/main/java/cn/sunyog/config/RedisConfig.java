@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.DefaultBaseTypeLimitingValidator;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +26,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @Date: 2021/5/18 1:35 下午
  * @Desc: redis相关配置
  */
+@Slf4j
 @Configuration
 public class RedisConfig {
     @Value("${spring.redis.host}")
@@ -49,6 +51,8 @@ public class RedisConfig {
     private Boolean testOnBorrow;
     @Value("${spring.redis.jedis.pool.testWhileIdle}")
     private Boolean testWhileIdle;
+    @Value("${spring.redis.config.listener.channels}")
+    private String channels;
 
     private RedisSerializer getSerializer() {
         ObjectMapper objectMapper = new ObjectMapper();
@@ -87,13 +91,16 @@ public class RedisConfig {
     public RedisTemplate getTemplate() {
         RedisTemplate template = new RedisTemplate<>();
         template.setConnectionFactory(this.getConnectFactory());
+        log.info("Redis连接工厂配置完成");
         RedisSerializer serializer = this.getSerializer();
         StringRedisSerializer strSerializer = new StringRedisSerializer();
         template.setKeySerializer(strSerializer);
         template.setValueSerializer(serializer);
         template.setHashKeySerializer(strSerializer);
         template.setHashValueSerializer(serializer);
+        log.info("Redis序列化配置完成");
         template.afterPropertiesSet();
+        log.info("Redis配置完成");
         return template;
     }
 
@@ -106,8 +113,12 @@ public class RedisConfig {
         RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(this.getConnectFactory());
 
-        //监听channel1
-        container.addMessageListener(this.getAdapter(), new ChannelTopic("channel1"));
+        String[] channelArr = this.channels.split(",");
+        for (String channel : channelArr) {
+            //监听channel1
+            container.addMessageListener(this.getAdapter(), new ChannelTopic(channel));
+            log.info("添加Redis Channel监听，Channel="+channel);
+        }
         return container;
     }
 
